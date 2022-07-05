@@ -8,7 +8,7 @@ const firebaseConfig = {
   messagingSenderId: "801182372746",
   appId: "1:801182372746:web:3c99d511b379d9ec60ae73",
   measurementId: "G-KC175GPV3T"
-};
+}; 
     
 firebase.initializeApp(firebaseConfig);
 
@@ -16,8 +16,9 @@ db = firebase.database()
 
 function EnviarDados(){
   try{
-    db.ref('users').set({
-      Jorge: {'Idade': 17, 'Doença': 'Diabete', 'Batimento Cardíaco': '96bpm' }
+    db.ref('Marcos_Paulo').set({
+      Informacoes : {'Idade': 17, 'Doença': 'Pneumonia', 'Nome': 'Marcos Paulo',
+         'Grau': 'Urgente', 'Batimento Cardiaco': '96bpm'}     
     })
     alert('Funcionou')
   }
@@ -29,12 +30,18 @@ function EnviarDados(){
 function BuscarDados(){
   try{
     db
-      .ref('users')
+      .ref('Marcos_Paulo')
       .once('value')
       .then(function(snapshot){
         resposta = snapshot.val()
         // resposta = JSON.stringify(resposta)
-        console.log(resposta['Jorge'])
+        console.log(resposta['Informacoes']['Nome'])
+        console.log(resposta['Informacoes']['Doença'])
+        console.log(resposta['Informacoes']['Grau'])
+        console.log(resposta['Informacoes'][ 'Batimento Cardiaco'])
+        alert("Urgente");
+      
+
       })
   }
   catch(error){
