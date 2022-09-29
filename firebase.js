@@ -9,37 +9,22 @@ const firebaseConfig = {
   appId: "1:801182372746:web:3c99d511b379d9ec60ae73",
   measurementId: "G-KC175GPV3T"
 }; 
+monitor_speed = 115200;
     
 firebase.initializeApp(firebaseConfig);
 
 db = firebase.database()
 
-function EnviarDados(){
-  try{
-    db.ref('Marcos_Paulo').set({
-      Informacoes : {'Idade': 17, 'Doença': 'Pneumonia', 'Nome': 'Marcos Paulo',
-         'Grau': 'Urgente', 'Batimento Cardiaco': '96bpm'}     
-    })
-    alert('Funcionou')
-  }
-  catch(error){
-    alert('Problema')
-  }
-  
-}
 function BuscarDados(){
   try{
     db
-      .ref('Marcos_Paulo')
+      .ref('test')
       .once('value')
       .then(function(snapshot){
         resposta = snapshot.val()
-        // resposta = JSON.stringify(resposta)
-        console.log(resposta['Informacoes']['Nome'])
-        console.log(resposta['Informacoes']['Doença'])
-        console.log(resposta['Informacoes']['Grau'])
-        console.log(resposta['Informacoes'][ 'Batimento Cardiaco'])
-        alert("Urgente");
+        resposta = JSON.stringify(resposta)
+        console.log(resposta)
+      
       
 
       })
@@ -47,5 +32,10 @@ function BuscarDados(){
   catch(error){
     alert('Problema')
   }
+  var var_lista = document.getElementById("lista");
+  var saida = ""
+  
+  saida = "<table>" +"<tr><td>" +resposta+"</td></tr>" +saida;
+  var_lista.innerHTML = saida;
 }
     
